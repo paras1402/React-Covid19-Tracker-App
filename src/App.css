@@ -19,10 +19,19 @@ body {
   flex: 0.9;
 }
 
+.right__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
 .App {
   display: flex;
   justify-content: space-evenly;
   padding: 2rem;
+}
+.graph {
+  margin-top: 5rem;
 }
 
 @media (max-width: 990px) {

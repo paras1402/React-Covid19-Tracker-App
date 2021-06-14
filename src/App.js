@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-
+import "leaflet/dist/leaflet.css";
 import {
   MenuItem,
   FormControl,
@@ -16,8 +16,11 @@ function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
   const [displayCountry, setDisplayCountry] = useState({});
-
+  const [mapCenter, setMapCenter] = useState({ lat: 20.5937, lng: 78.9629 });
   const [tableData, setTableData] = useState([]);
+  const [casesType, setCasesType] = useState("cases");
+  const [mapZoom, setMapZoom] = useState(4);
+  const [mapCountries, setMapCountries] = useState([]);
 
   // const getCountries = async () => {
   //   const request = await fetch("https://disease.sh/v3/covid-19/countries");
@@ -39,6 +42,7 @@ function App() {
         };
       });
 
+      setMapCountries(data);
       setTableData(data);
       setCountries(countryList);
     };
@@ -64,6 +68,9 @@ function App() {
     const response = await fetch(url);
     const data = await response.json();
 
+    console.log([data.countryInfo.lat, data.countryInfo.long]);
+    setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+    setMapZoom(5);
     setDisplayCountry(data);
   };
 
@@ -109,16 +116,26 @@ function App() {
         </div>
 
         {/* Map */}
-        <Map />
+        <Map
+          // casesType={casesType}
+          countries={mapCountries}
+          center={mapCenter}
+          zoom={mapZoom}
+          casesType={casesType}
+        />
       </div>
       <Card className="app__right">
         {/* Table */}
         {/* Graph */}
         <CardContent>
-          <h3>Live Cases by Country</h3>
-          <Table countries={tableData}></Table>
-          <h3>WorldWide new Cases</h3>
-          <LineGraph></LineGraph>
+          <div className="right__content">
+            <h3>Live Cases by Country</h3>
+            <Table countries={tableData}></Table>
+            <div className="graph">
+              <h3>WorldWide new Cases</h3>
+              <LineGraph></LineGraph>
+            </div>
+          </div>
         </CardContent>
       </Card>
     </div>
