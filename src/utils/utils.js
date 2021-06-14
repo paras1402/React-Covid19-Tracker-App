@@ -30,13 +30,18 @@ export const sortData = (data) => {
   return sortedData;
 };
 
-export const showDataOnMap = (data, casesType) =>
-  data.map((country) => (
+export const showDataOnMap = (data, casesType) => {
+  console.log(casesType);
+  console.log();
+
+  return data.map((country) => (
     <Circle
       center={[country.countryInfo.lat, country.countryInfo.long]}
       fillOpacity={0.4}
-      color={casesTypeColors[casesType].hex}
-      fillColor={casesTypeColors[casesType].hex}
+      pathOptions={{
+        color: casesTypeColors[casesType].hex,
+        fillColor: casesTypeColors[casesType].hex,
+      }}
       radius={
         Math.sqrt(country[casesType] / 10) *
         casesTypeColors[casesType].multiplier
@@ -64,3 +69,8 @@ export const showDataOnMap = (data, casesType) =>
       </Popup>
     </Circle>
   ));
+};
+
+export const prettyPrintStat = (stat) => {
+  return stat ? `+${numeral(stat).format("0,0a")}` : "0";
+};

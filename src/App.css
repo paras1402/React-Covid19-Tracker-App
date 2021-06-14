@@ -4,11 +4,16 @@
 body {
   background-color: #f5f6fa;
 }
+
+.app__dropdown {
+  background-color: white;
+}
+
 .app__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
 }
 .app__stats {
   display: flex;
@@ -24,6 +29,7 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  height: 80vh;
 }
 .App {
   display: flex;
@@ -32,10 +38,37 @@ body {
 }
 .graph {
   margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  flex-grow: 1;
+  justify-content: space-around;
+  align-items: center;
 }
-
+.heading {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.heading h1 {
+  display: inline;
+  width: max-content;
+  font-size: 1rem;
+}
+.icon {
+  display: inline;
+  height: 50px;
+  width: 50px;
+}
 @media (max-width: 990px) {
   .App {
     flex-direction: column;
+  }
+  .app__stats {
+    flex-direction: column;
+    margin: none;
+  }
+  .heading h1 {
+    display: none;
   }
 }
